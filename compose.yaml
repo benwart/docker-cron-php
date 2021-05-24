@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  cron:
+    build: ./
+    image: cron-php:latest
+    command: crond -f -l 0
+    volumes:
+        - ./tasks/1min:/etc/periodic/1min/:ro
+        - ./tasks/5min:/etc/periodic/5min/:ro
+        - ./tasks/15min:/etc/periodic/15min/:ro
+        - ./output:/output:delegated
+    
